@@ -140,7 +140,6 @@
 
 (define (eps-header paper bbox load-fonts?)
   (string-append "%!PS-Adobe-2.0 EPSF-2.0\n"
-                 "%%Creator: LilyPond " (lilypond-version) "\n"
                  "%%BoundingBox: "
                  (string-join (map ly:number->string bbox) " ") "\n"
                  "%%Orientation: "
@@ -170,7 +169,6 @@
 
 (define (file-header paper page-count load-fonts?)
   (string-append "%!PS-Adobe-3.0\n"
-                 "%%Creator: LilyPond " (lilypond-version) "\n"
                  "%%Pages: " (number->string page-count) "\n"
                  "%%PageOrder: Ascend\n"
                  "%%Orientation: "
@@ -752,17 +750,11 @@ mark {ly~a_stream} /CLOSE pdfmark
     ;; don't do BeginDefaults PageMedia: A4
     ;; not necessary and wrong
     (write-preamble paper #t port)
-    (handle-metadata header port)
     (for-each
      (lambda (page)
        (set! page-number (1+ page-number))
        (dump-page outputter page page-number page-count landscape?))
      stencils)
-    (if (ly:get-option 'outline-bookmarks)
-        (dump-pdf-bookmarks
-         (ly:output-def-lookup paper 'label-alist-table)
-         (ly:output-def-lookup paper 'label-page-table)
-         port))
     (display "%%Trailer\n%%EOF\n" port)
     (ly:outputter-close outputter)
     (postprocess-output paper framework-ps-module formats

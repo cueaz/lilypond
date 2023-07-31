@@ -123,6 +123,9 @@
                    ;; Set a fixed version of 1.4, which is also the basis
                    ;; of the standard PDF/A and has all features we need.
                    "/CompatibilityLevel 1.4"
+                   "/OmitInfoDate true"
+                   "/OmitID true"
+                   "/OmitXMP true"
                    (if (not is-eps)
                        (ly:format "/PageSize [~$ ~$]" paper-width paper-height))
                    "(pdfwrite) finddevice putdeviceprops pop"
