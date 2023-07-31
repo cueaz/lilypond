@@ -3753,7 +3753,7 @@ simple_element:
 	}
  	| RESTNAME optional_notemode_duration		{
 		Music *ev = 0;
- 		if (ly_scm2string ($1) == "s") {
+ 		if (ly_scm2string ($1) == "x") {
 			/* Space */
 			ev = MY_MAKE_MUSIC ("SkipEvent", @$);
 		  }

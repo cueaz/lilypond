@@ -185,7 +185,7 @@ STRICTREAL      {UNSIGNED}\.{UNSIGNED}
 WHITE		[ \n\t\f\r]
 HORIZONTALWHITE		[ \t]
 BLACK		[^ \n\t\f\r]
-RESTNAME	[rs]
+RESTNAME	[zx]
 ESCAPED		[nt\\''""]
 EXTENDER	__
 HYPHEN		--
@@ -401,8 +401,8 @@ FIG_ALT_EXPR	{WHITE}*{FIG_ALT_SYMB}({FIG_ALT_SYMB}|{WHITE})*
 	return CHORD_REPETITION;
 }
 
-<chords,notes,figures>R/[-_]	| // pseudo backup rule
-<chords,notes,figures>R		{
+<chords,notes,figures>Z/[-_]	| // pseudo backup rule
+<chords,notes,figures>Z		{
         yylval = SCM_UNSPECIFIED;
 	return MULTI_MEASURE_REST;
 }
